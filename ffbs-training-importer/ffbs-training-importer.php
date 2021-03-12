@@ -10,3 +10,8 @@ License: MIT
 */
 
 define('MISSIONS_PLUGIN_DIR', plugin_dir_path(__FILE__));
+require_once(MISSIONS_PLUGIN_DIR . 'class.ffbs-training-importer.php');
+require_once(MISSIONS_PLUGIN_DIR . 'class.ffbs-training-importer-rest.php');
+require_once(MISSIONS_PLUGIN_DIR . 'class.ffbs-training-importer-db.php');
+
+$ffbsTrainingImporter = new FFBSTrainingImporter();
