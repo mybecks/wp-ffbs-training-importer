@@ -1,0 +1,9 @@
+.DS_Store
+.buildpath
+.phptidy-cache
+.bak
+node_modules
+.db_data
+*.zip
+.idea
+*.orig
