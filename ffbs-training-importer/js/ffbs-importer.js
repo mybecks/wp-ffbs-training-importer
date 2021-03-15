@@ -1,36 +1,5 @@
 var $ = jQuery;
 
-let handleDrop = function (e) {
-    var dt = e.dataTransfer;
-    var files = dt.files;
-
-    handleFiles(files);
-}
-
-// let initializeProgress = function (numFiles) {
-//     let uploadProgress = []
-//     let progressBar = $('#progress-bar')
-//     progressBar.value = 0
-
-//     for (let i = numFiles; i > 0; i--) {
-//         uploadProgress.push(0)
-//     }
-// }
-
-// let updateProgress = function (fileNumber, percent) {
-//     uploadProgress[fileNumber] = percent
-//     let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
-//     console.debug('update', fileNumber, percent, total)
-//     progressBar.value = total
-// }
-
-let handleFiles = function (files) {
-    files = [...files]
-    // initializeProgress(files.length)
-    files.forEach(uploadFile)
-    // files.forEach(previewFile)
-}
-
 let readFileAsync = function (file) {
     return new Promise((resolve, reject) => {
         let reader = new FileReader();
@@ -84,21 +53,24 @@ let doDrop = function () {
     $("#drop-area").on("dragleave", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $(this).removeClass('unhighlight');
+        $(this).removeClass('highlight');
     });
 
     $("#drop-area").on("dragenter", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $(this).addClass('unhighlight');
+        $(this).addClass('highlight');
     });
 
     $("#drop-area").on("drop", function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $(this).removeClass('unhighlight');
+        $(this).removeClass('highlight');
         console.log("Dropped!");
-        handleDrop(e.originalEvent)
+
+        let dt = e.originalEvent.dataTransfer;
+        let file = dt.files[0];
+        sendFileContent(file)
     });
 }
 
